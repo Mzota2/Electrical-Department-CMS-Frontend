@@ -182,6 +182,25 @@ function Home() {
       }, 5000)
     }
 
+    async function handleUpdateModules(){
+      const date = new Date();
+      const day = date.getDay();
+      const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      try {
+        foundModules?.map((md)=>{
+          md?.classDays?.map(async(cls)=>{
+            if(cls?.day !== days[day] && cls?.isCancelled){
+              await axios.put(`${appUrl}module/${md?._id}`, {...md, isCancelled:false});
+            }
+          })
+        })
+        
+      } catch (error) {
+        console.log(error);
+      }
+      
+    }
+
     React.useEffect(()=>{
 
         if(programsStatus === 'idle'){
@@ -198,7 +217,8 @@ function Home() {
         }
 
         else if((moduleStatus !== 'idle') && activeUser){
-            
+            //update modules
+            handleUpdateModules();
              //set my modules
              const myModules = activeUser?.modules?.map((myModule)=>{
               const existingModule = foundModules?.find(md => md._id === myModule);

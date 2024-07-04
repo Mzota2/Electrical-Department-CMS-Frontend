@@ -5,11 +5,19 @@ import {message} from 'antd'
 import { Link, useNavigate } from 'react-router-dom';
 import {animated, useSpring} from '@react-spring/web';
 import InfoIcon from '@mui/icons-material/Info';
+import axios from 'axios';
+import { appUrl } from '../../Helpers';
 
 
 function Account({student, handleClose, show, handleShowAccount}) {
   const navigate = useNavigate();
   const menu = useRef(null);
+
+  //semesterdates
+  const [schoolDates, setSchoolDates] = useState({
+    startDate:'',
+    endDate:''
+});
 
   const [logingOut, setLogingOut] = useState(false);
   //const animations
@@ -34,18 +42,45 @@ function Account({student, handleClose, show, handleShowAccount}) {
    
   }
 
+  async function getSchoolDates(){
+    try {
+
+        const response = await axios.get(`${appUrl}settings`);
+        let {data} = response;
+        
+
+        console.log(data);
+
+        const months = ['Jan', 'Feb', 'Mar', 'Apri', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+        let startDate = data[0]?.openingDate;
+        let endDate = data[0]?.closingDate;
+        setSchoolDates((prev)=>{
+            return {
+                ...prev,
+                startDate:`${startDate?.slice(8)} ${months[Number(startDate?.slice(5,7))-1]} ${startDate?.slice(0, 4)}`,
+                endDate:`${endDate?.slice(8)} ${months[Number(endDate?.slice(5,7))-1]} ${endDate?.slice(0, 4)}`,
+            }
+        });
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
   useEffect(()=>{
 
 
-    document.addEventListener('click', (e)=>{
-      handleClickMenu(e)
-    })
+    getSchoolDates();
 
-    return (()=>{
-      document.removeEventListener('click', (e)=>{
-        handleClickMenu(e)
-      })
-    })
+    // document.addEventListener('click', (e)=>{
+    //   handleClickMenu(e)
+    // })
+
+    // return (()=>{
+    //   document.removeEventListener('click', (e)=>{
+    //     handleClickMenu(e)
+    //   })
+    // })
   }, [])
 
   return (
@@ -106,6 +141,12 @@ function Account({student, handleClose, show, handleShowAccount}) {
           <div onClick={logout} className="cms-account-student-additional">
               <Logout className='cms-account-icon'/>
               <p className='cms-account-important-title'>Logout</p>
+          </div>
+
+          <div className="cms-semester-dates-container cms-semester-dates-account">
+              <p>{schoolDates?.startDate}</p>
+              <p>-</p>
+              <p>{schoolDates?.endDate}</p>
           </div>
 
         </div>        

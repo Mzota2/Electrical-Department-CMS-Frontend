@@ -60,12 +60,15 @@ function NavBar() {
             
 
             console.log(data);
-           
+
+            const months = ['Jan', 'Feb', 'Mar', 'Apri', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+            let startDate = data[0]?.openingDate;
+            let endDate = data[0]?.closingDate;
             setSchoolDates((prev)=>{
                 return {
                     ...prev,
-                    startDate:data[0]?.openingDate,
-                    endDate:data[0]?.closingDate
+                    startDate:`${startDate?.slice(8)} ${months[Number(startDate?.slice(5,7))-1]} ${startDate?.slice(0, 4)}`,
+                    endDate:`${endDate?.slice(8)} ${months[Number(endDate?.slice(5,7))-1]} ${endDate?.slice(0, 4)}`,
                 }
             });
         } catch (error) {

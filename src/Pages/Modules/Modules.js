@@ -19,6 +19,7 @@ import DialogBox from '../../Components/DialogBox/DialogBox';
 import { animated, useSpring } from '@react-spring/web';
 
 function Modules() {
+  const [selectAll, setSelectAll] = useState(false);
   //active tab
 
   const [activeTab, setActiveTab] = React.useState('My Modules');
@@ -302,6 +303,32 @@ function Modules() {
         setShowMiniLoader(false);
       }, 3000)
     }
+  }
+
+  async function handleEnrollAllModules(){
+    setSelectAll(prev => !prev);
+    if(!selectAll){
+      try {
+        setShowMiniLoader(true);
+        const IDs = modules?.map((md)=> md?._id);
+        const studentModules =user?.modules?user?.modules.concat(IDs):IDs;
+        const response = await axios.put(`${appUrl}student/${user?._id}`, {...user, modules:studentModules});
+        const {data} = response;
+        //console.log(data);
+        localStorage.setItem('cms-user', JSON.stringify(data));
+        dispatch(setActive(data));
+  
+        message.success(`Enrolled in all modules`)
+        
+      } catch (error) {
+        console.log(error);
+      }finally{
+        setTimeout(()=>{
+          setShowMiniLoader(false);
+        }, 3000)
+      }
+    }
+    
   }
 
   async function handleLeave(id){
@@ -829,6 +856,11 @@ function Modules() {
           </div>
 
           <div className="class-modules-window">
+
+            {activeTab === 'Program' && !activeUser?.modules?.length && <form className='cms-modules-select-all'>
+              <label htmlFor="select-all">Enroll in all modules</label>
+              <input onChange={handleEnrollAllModules} type="checkbox" className='cms-select-all-modules-btn' />
+            </form>}
             {
               isViewDepartment?
               modules?.map((module)=>{
