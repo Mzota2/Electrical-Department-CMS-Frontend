@@ -1,0 +1,228 @@
+
+.cms-today-main-container{
+    background-color: white;
+    padding: 2em 1em;
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+}
+
+.cms-today-inner-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+ 
+}
+
+.cms-assignments-container{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
+    min-height: 50vh;
+
+}
+@media (max-width:650px){
+    .cms-assignments-container{
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 1em;
+    }
+}
+@media (max-width:450px) {
+    .cms-today-main-container{
+        padding: 1em;
+    }
+}
+
+
+
+/* today container */
+
+.cms-today-cls{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 90%;
+    max-width: 300px;
+    box-shadow: 0px 0px 6px 3px rgba(0, 0, 0, 0.057);
+    cursor: pointer;
+    height: fit-content;
+}
+
+.cms-today-cls:hover,
+.cms-today-cls:focus{
+    transition: ease .5s;
+    background-color: var(--smooth-blue);
+}
+.cms-today-classes-title{
+    align-self: center;
+    color: var(--light-blue);
+    margin-bottom: 1em;
+}
+
+.cms-today-module-title-container{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    padding: .5em 1em;
+    
+}
+
+.cms-today-module-title{
+    color: rgba(0, 0, 0, 0.339);
+}
+
+.cms-assignment-availability-container{
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    margin-left: auto;
+}
+
+.cms-today-module-availability{
+    
+    background-color: green;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+}
+
+.cms-assign-cls{
+    flex-direction: column !important;
+    
+}
+.cms--assignment-details-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: .8em;
+    z-index: 1;
+    flex-shrink: 0;
+    background-color: var(--dark-blue);
+    border-top: 1px solid #ddd;
+    color: white;
+    padding: 1em;
+}
+
+.cms-assignment-time-tracker-container{
+    
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4em;
+}
+
+.cms-assignment-time-tracker{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .5em;
+}
+
+.cms-assignment-time-to-go{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border: 2px solid var(--feint-blue);
+}
+.cms-assign-drop-icon{
+    cursor: pointer;
+    margin-left: auto !important;
+    font-size: 2rem !important;
+}
+
+.cms-assign-drop-icon:hover,
+.cms-assign-drop-icon:focus{
+    color: var(--dark-blue);
+    transition: ease .5s;
+}
+
+@keyframes toggleDesc{
+    from{
+        margin-top: -20%;
+    }
+    to{
+        margin-top: 0%;
+    }
+}
+
+.cms-assignment-description-container{
+    z-index: 0 !important;
+    padding: 1em;
+    width: 100%;
+    border-bottom: 2px solid var(--dark-blue);
+}
+
+.cms-assignment-important-dates-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 1em;
+}
+
+.cms-assignment-important-dates-container p{
+    color: rgba(0, 0, 0, 0.257);
+}
+
+.cms-assign-tabs{
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+.cms-assign-title{
+    color: var(--light-blue);
+}
+.cms-add-assign-btn{
+    color: white;
+    font-size: 1rem ;
+    padding: .3em .5em ;
+    background-color: var(--dark-blue) !important;
+    cursor: pointer;
+}
+
+.cms-assign-field{
+    border: 1px solid var(--dark-blue) !important;
+
+}
+
+.cms-assign-form{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    width: 100%;
+    max-width: 700px;
+}
+
+.cms-create-assign-btn{
+    font-size: 1rem;
+    background-color: green;
+    color: white;
+    max-width: 300px;
+    width: 100%;
+    align-self: center;
+}
+
+@media (max-width:450px) {
+    .cms-assignments-container{
+        height: fit-content;
+        width: fit-content;
+    }
+    .cms-today-cls{
+        width: 250px;
+    }
+}

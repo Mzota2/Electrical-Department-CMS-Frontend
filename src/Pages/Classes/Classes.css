@@ -1,0 +1,134 @@
+
+.module-more-details{
+    background-color: var(--light-blue);
+    width: 90%;
+    max-width: 300px;
+    padding: 1dvh;
+    color: white;
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+    box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.208);
+   
+}
+
+.cms-class-module{
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 1em;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    gap: 1em;
+}
+
+/*  */
+.cms-module-dy{
+    display: flex;
+    flex-direction: column;
+    gap: .7em;
+}
+.cms-module-dy-info {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.hr-line{
+    width: 100%;
+    border: 2px solid #ddd;
+}
+
+/* status */
+
+.cms-module-status-container{
+    margin-left: auto;
+}
+.m-status{
+    font-size: 1.5rem;
+}
+
+.m-status-on{
+    color: green;
+}
+
+.m-status-off{
+    color: rgba(255, 0, 0, 0.477);
+}
+
+.cms-class-on-icon{
+    color: green;
+}
+
+.cms-class-pending-icon{
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    border: 2px dashed green;
+}
+
+.cms-class-completed-icon{
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: var(--dark-blue);
+}
+
+.cms-class-off-icon{
+    color: rgba(255, 0, 0, 0.477);
+}
+.cms-student-classes-tab{
+    display: flex;
+    align-items: center;
+    gap: .5em;
+    justify-content: center;
+}
+/*  */
+
+.cms-module-expand-container{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--feint-blue);
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.cms-expand-icon{
+    color: var(--light-blue);
+}
+
+.cms-module-expand-container:hover,
+.cms-module-expand-container:focus{
+    background-color: var(--light-blue);
+    transition: .5s ease;
+}
+
+.cms-module-expand-container:hover .cms-expand-icon,
+.cms-module-expand-container:focus .cms-expand-icon{
+    color: white;
+    transition: .5s ease;
+}
+
+@media (max-width:650px) {
+    .class-module-tabs-container{
+        width: 100%;
+        overflow-x: auto;
+        flex-grow: 1;
+        flex-shrink: 0;
+    }
+
+    .class-module-tab{
+        padding-left: 1em;
+        padding-right: 1em;
+        
+    }
+}

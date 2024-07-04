@@ -1,0 +1,250 @@
+.signin-container{
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    
+}
+
+.cms-signin-panel{
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width:1400px;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    padding: 2em;
+    justify-content: space-between;
+    background-color: white;
+}
+.cms-service-icon{
+    font-size: 3rem !important;
+    color:var(--dark-blue);
+}
+.cms-panel-options{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1;
+}
+
+.signin--option{
+    border-image-source: linear-gradient(to left, #04fff2, #2c275c);;
+    border-bottom: 2px solid;
+    background-color: var(--smooth-blue);
+    border-width: 2px;
+    width: 20%;
+    max-width: 300px;
+    padding: 1em 1em;
+    border-image-slice: 1;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.223);
+    
+}
+
+.signin--option:hover,
+.signin--option:focus{
+    cursor: pointer;
+    transition: ease 0.5s;
+    background-color: white;
+}
+.cms-service-title{
+    color: var(--blue-color);
+    
+}
+
+.cms-service-description{
+    text-align: center;
+}
+
+.sign-image-container{
+    position: absolute;
+    width: 100%;
+    height: 80%;
+    top: 0;
+    right: 0;
+}
+
+.sign-image{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+}
+
+.image-overlay{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to left,#107dacaf,#2c275caf );
+}
+.signin-inner-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.signin-hello{
+    max-width: 40%;
+    min-width: 350px;
+    z-index: 1;
+    color: white;
+    font-family: 'Lato', sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+}
+
+.signin-hello-text{
+    font-size: 2rem;
+    letter-spacing: 2px;
+}
+
+.signin-description{
+    font-size: 1.225rem;
+    font-style: italic;
+    color: rgb(249, 249, 249);
+}
+
+.signin-text{
+    font-size: 4rem;
+    color: white;
+}
+
+.signin-form{
+    z-index: 2;
+    padding: 1em 1em;
+    background-color: rgba(244, 244, 244, 0.731);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+    width: 90%;
+    max-width: 400px;
+    
+}
+
+.sign-field{
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+}
+
+.cms-input-field{
+    height: 40px;
+    width: 100%;
+    border: none;
+    outline: none;
+    text-indent: 10px;
+    font-size: 1rem;
+}
+
+.cms-input-field:focus{
+    box-shadow:0px 0px 2px #00a3e9;
+}
+
+.cms-submit-btn{
+    height: 40px;
+    background-color: var(--blue-color);
+    font-size: 1.2rem;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 170px;
+    align-self: center;
+}
+
+.error-text{
+    color: red;
+}
+
+.show-pwd-container{
+    display: flex;
+    align-items: center;
+    gap: .5em;
+}
+
+.checkPassword{
+    height: 20px;
+    width: 20px;
+    outline: none;
+    cursor: pointer;
+}
+
+
+@media (min-width:700px) {
+    .signin-form{
+        padding-left: 2em;
+        padding-right: 2em;
+    }
+}
+
+@media (max-width:1100px){
+    .signin--option{
+        padding: .5em;
+        width: 24%;
+    }
+}
+
+
+@media (max-width:850px){
+    .signin-container{
+        height: fit-content;
+    }
+    .cms-signin-panel{
+        gap: 1em;
+    }
+
+    html{
+        font-size: 14px;
+    }
+    .cms-panel-options{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
+        gap: 1em;
+    }
+    .signin--option{
+        width: 100%;
+    }
+
+
+    .signin-inner-container{
+        gap: 1em;
+        flex-direction: column;
+        
+    }
+
+    .signin-hello{
+        max-width: 300px;
+        align-items: center;
+        text-align: center;
+    }
+
+    .signin-description{
+        max-width: 300px;
+    }
+    
+    .signin-text{
+        display: none;
+    }
+
+
+    .signin-hello-text{
+        font-size: 1.75rem;
+    }
+
+    .sign-image-container{
+        height: 70%;
+    }
+
+    .signin-form{
+        width: 100%;
+    }
+}

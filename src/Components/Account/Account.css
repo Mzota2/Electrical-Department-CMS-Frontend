@@ -1,0 +1,144 @@
+
+.cms-account-container{
+    position: absolute;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    max-width: 350px;
+    background-color: white !important;
+    box-shadow: -2px 2px 6px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+    padding: 2em;
+    gap: 1em;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+/* USER INFO */
+.hrb{
+    width: 100%;
+    border: 1px solid rgba(76, 74, 95, 0.296);
+}
+.cms-account-user-info-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+}
+
+.cms-account-profile-menu-icon{
+    margin-left: 0;
+    align-self: center;
+    cursor: pointer;
+}
+
+.cms-account-student-container{
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    padding: 1em;
+    background-color: var(--feint-blue);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.cms-engineer-icon-container{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: var(--light-blue);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.cms-account-engineer-icon{
+    color: white;
+    font-size: 2rem !important;
+}
+
+.cms-account-student-details{
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+}
+
+.cms-account-student-regNo{
+    color: var(--light-blue);
+}
+
+
+.cms-account-student-important-container{
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    gap: 1em;
+    justify-content: space-between;
+}
+
+.cms-account-student-important{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .5em;
+    width: 120px;
+    height: 70px;
+    background-color: var(--feint-blue);
+    padding: 1em 0;
+    cursor: pointer;
+}
+
+.cms-account-icon{
+    color: var(--light-blue);
+    font-size: 2rem !important;
+}
+
+.cms-account-student-important:hover,
+.cms-account-student-important:focus{
+    background-color: var(--dark-blue);
+}
+
+.cms-account-student-important:hover .cms-account-icon,
+.cms-account-student-important:focus .cms-account-icon{
+    color: white;
+}
+
+/* additional */
+
+.cms-account-student-additional-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.cms-account-student-additional{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    padding: .3em 1em;
+    background-color: var(--feint-blue);
+}
+
+.cms-account-student-additional:hover,
+.cms-account-student-additional:focus{
+    background-color: var(--dark-blue);
+}
+
+.cms-account-student-additional:hover .cms-account-icon,
+.cms-account-student-additional:focus .cms-account-icon{
+    color: white;
+}
+
+@media (min-width:900px) {
+    .cms-account-container{
+        max-width: 400px;
+    }
+    .cms-account-user-info-container{
+        height: 100%;
+    }
+    
+}

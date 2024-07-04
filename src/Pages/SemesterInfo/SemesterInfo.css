@@ -1,0 +1,142 @@
+
+.cms-semester-info-background-container{
+    height: 30vh;
+    width: 100%;
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.cms-semester-info-container{
+    margin:0 auto;
+    max-width: 1200px;
+    position: relative;
+    padding: 1em 2em;
+}
+
+.cms-semester-panel-tab{
+    background-color: white;
+    font-size: 1rem;
+    padding: .8em 2em;
+    border: 1px solid rgba(0, 0, 0, 0.226);
+}
+
+.cms-my-groups-container{
+    margin-top: 2em;
+    display: flex ;
+    width: 100%;
+    align-items: baseline;
+    gap: 3em;
+    flex-wrap: wrap;
+    padding: 2em;
+}
+
+.cms-task-module{
+    color: rgba(0, 0, 0, 0.258);
+    font-size: 1rem;
+}
+.cms-user-group:focus .cms-task-module,
+.cms-user-group:hover .cms-task-module{
+    color: white;
+}
+
+.cms-semester-info-panel-mobile{
+    display: none;
+}
+
+.cms-semester-info-menu-mobile{
+    display: none;
+}
+
+.cms-semester-info-panel-mobile-sidebar-icon{
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background-color: var(--feint-blue);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.cms-sidebar-icon{
+    color: rgb(61, 59, 59);
+    font-size: 1.2rem !important;
+}
+
+.cms-semester-info-panel-mobile-sidebar-icon:focus,
+.cms-semester-info-panel-mobile-sidebar-icon:hover{
+    color: var(--smooth-blue);
+}
+.cms-semester-info-panel{
+
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 1em;
+}
+
+@media (max-width:600px){
+    .cms-semester-info-panel{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .cms-my-groups-container{
+        flex-direction: column;
+        align-items: center;
+        overflow-x: auto;
+    }
+
+    .cms-semester-info-container{
+        padding: 1em 0;
+    }
+    .cms-semester-info-panel-mobile-sidebar-icon{
+        margin-left: 1em;
+    }
+   
+}
+
+@media(max-width:500px){
+    .cms-semester-info-panel{
+        display: none;
+    }
+
+    .cms-semester-info-menu-mobile{
+        display: flex;
+        align-items: center;
+        gap: 1em;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 1em;
+    }
+
+    .cms-semester-info-panel-mobile{
+        display: flex;
+        flex-direction: column;
+        padding-top: 1em;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: white;
+        box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.237);
+        z-index: 2;
+        align-items: center;
+        width: 200px;
+        margin-top: 0;
+
+    }
+
+    .cms-semester-panel-tab{
+        background-color: white;
+        font-size: 1rem;
+        padding: .8em 2em;
+        border: 1px solid rgba(0, 0, 0, 0.226);
+        width: 100%;
+    }
+}
+

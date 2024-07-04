@@ -1,0 +1,90 @@
+
+.cms-timetable-days{
+    margin-top: 2em;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: minmax(40px, auto);
+    background-color: var(--feint-blue);
+    padding: 2em;
+}
+.cms-timetable-day{
+    background-color: var(--dark-blue);
+    border: 1px solid white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 1em;
+    color: rgba(255, 255, 255, 0.859);
+}
+.cms-timetable-mon{
+    grid-column: 1 / 2;
+}
+
+@media (max-width:900px){
+    .cms-timetable-days{
+        overflow-x: auto;
+        grid-template-columns: repeat(5, minmax(100px, 150px));
+    }
+
+    .cms-timetable-day h4{
+        font-size: .8rem;
+    }
+
+    .cms-timetable-mon-cls h4{
+        font-size: .8rem;
+    }
+    .cms-timetable-mon-cls{
+        font-size: .8rem;
+    }
+
+}
+
+.cms-timetable-tue{
+    grid-column:  2 / 3;
+}
+
+.cms-timetable-wed{
+    grid-column: 3 / 4;
+}
+
+.cms-timetable-thur{
+    grid-column: 4 / 5;
+}
+
+.cms-timetable-fri{
+    grid-column: 5 / 5;
+}
+
+.cms-timetable-mon-cls{
+    padding: 1em;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    gap: .8em;
+    cursor: pointer;
+    border: 1px solid rgba(0, 0, 0, 0.242);
+}
+
+.cms-timetable-mon-cls:hover,
+.cms-timetable-mon-cls:focus{
+    background-color: var(--light-blue);
+    transition: .5s ease-in-out;
+    color: rgba(255, 255, 255, 0.802);
+}
+
+
+.cms-timetable-filter-container{
+    margin-top: 1em;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cms-timetable-filter-container select{
+    max-width: fit-content;
+}
+
+.cms-field{
+    flex-shrink: 0;
+}

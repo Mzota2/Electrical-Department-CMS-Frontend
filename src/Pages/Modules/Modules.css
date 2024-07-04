@@ -1,0 +1,249 @@
+.sub-nav-container{
+    padding: 2em;
+}
+.sub-logo-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .5em;
+    text-decoration: none;
+}
+
+.sub-logo-container .logo-title{
+    color: black;
+    border: none;
+    text-decoration: none;
+}
+
+.sub-nav-line{
+    border: 1px solid var(--blue-color);
+}
+
+.cms-module-backgroundImage{
+    width: 100%;
+    max-height: 70vh;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* MAIN CLASS MODULES */
+
+.class-modules-container{
+    width: 95%;
+    margin: 2em auto;
+    max-width: 900px;
+
+}
+.class-module-tabs-container{
+    display: flex;
+    align-items: center;
+}
+
+.class-module-tab{
+    background-color: transparent;
+    color: black;
+    border: 1px solid var(--blue-color);
+    outline: none;
+    height: 40px;
+    width: 200px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.cms-add-module-btn{
+    margin-left: auto;
+    align-self: flex-end !important;
+    background-color: black !important;
+    color: white;
+}
+
+.activate-tab{
+    border: none;
+    background-color: var(--light-blue);
+    color: white;
+}
+
+.class-module-tab:hover,
+.class-module-tab:focus{
+    opacity: 0.7;
+    transition: ease 0.5s;
+}
+
+.class-modules-window{
+    margin-top: 1em;
+    background-color: rgb(250, 252, 255);
+    padding: 4em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    border-top: 2px solid var(--dark-blue);
+}
+.vertical-space{
+    font-size: 1.5rem;
+}
+.class-module{
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    background-color: rgb(255, 255, 255);
+    padding: 0.8em 1em;
+    cursor: pointer;
+}
+
+.cms-class-module-controllers{
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+
+.cms-select-btn{
+    border: none;
+    outline: none;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+}
+
+.cms-select-btn:hover,
+.cms-select-btn:focus{
+    background-color: white;
+    color: black !important;
+    transition: ease 0.3s;
+}
+.cms-enroll-btn{
+    background-color: var(--light-blue);
+}
+
+.cms-leave-btn{
+    background-color: black;
+}
+
+.cms-delete-btn{
+    background-color: red;
+}
+
+.cms-edit-btn{
+    background-color: orange;
+}
+
+.cms-remove-btn{
+    background-color: black;
+}
+
+.class-module:hover,
+.class-module:focus{
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.232);
+    transform: scale(1.02);
+    transition: ease 0.5s;
+}
+.class-module-lecturer{
+    color: rgb(60, 180, 231);
+    cursor: pointer;
+}
+
+
+/* Module add css */
+.cms-module-days-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+}
+.cms-module-dayrs-row{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1em;
+}
+.cms-module-dayrs-time-row{
+    display: flex;
+    gap: 1em;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.cms-module-dayrs-row .cms-add-student-field{
+    max-width: 200px;
+}
+
+.cms-module-dayrs-time-row .cms-add-student-field{
+    max-width: 150px;
+}
+
+/* control btns */
+
+.cms-add-module-control-btns{
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+
+}
+
+.cms-module-options-icon-container{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    cursor: pointer;
+}
+
+.cms-module-options-icon-container:hover,
+.cms-module-options-icon-container:focus{
+    background-color: var(--feint-blue);
+    transition: ease .5s;
+}
+
+@media (max-width:600px) {
+    .cms-module-backgroundImage{
+        height: 100%;
+        width: 100%;
+    }
+    .class-modules-window{
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+    .class-module{
+        max-width: 100%;
+        font-size: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .class-module-tab{
+        width: fit-content;
+        padding:0 1em;
+        height: 30px;
+        flex-shrink: 0;
+        font-size: .8rem;
+        
+    }
+
+    .cms-add-module-btn{
+        flex-shrink: 0;
+        height: 30px !important;
+        width: 40px !important;
+    }
+   
+}
+
+@media (max-width:450px) {
+    .cms-select-btn{
+        width: 30px;
+        height: 30px;
+        font-size: .85rem !important;
+    }
+    
+}

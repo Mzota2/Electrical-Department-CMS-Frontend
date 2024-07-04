@@ -1,0 +1,32 @@
+.cms-module-menu{
+    padding: 1em 0;
+    background-color: white;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.116);
+    position: absolute;
+    bottom: 20%;
+    right: 0%;
+}
+.cms-module-menu-options{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    
+}
+
+.cms-module-option-container{
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    
+}
+
+.cms-module-option{
+    padding:.5em 2em;
+    width: 100%;
+    cursor: pointer;
+
+}
+.cms-module-option:hover{
+    background-color:var(--feint-blue);
+    transition: .5s ease;
+}

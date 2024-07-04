@@ -1,0 +1,119 @@
+.cms-today-outer-container{
+    z-index: 100;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.421);
+   
+}
+
+.cms-today-main-container{
+    background-color: white;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.338);
+    padding: 2em;
+    width: 100%;
+    height: 80%;
+    max-width: 900px;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+}
+
+.cms-today-inner-container{
+    z-index: 100;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 70%;
+    height: fit-content;
+}
+
+/* expand icon */
+.cms-today-exapand-icon{
+    margin-top: auto;
+    align-self: flex-end;
+}
+
+
+@keyframes minimise {
+    from{
+        transform: scale(1);
+    }
+
+    to{
+        width: 500px;
+        max-width: 100%;
+        height: fit-content;
+    }
+    
+}
+
+@keyframes maxmise{
+    from{
+        transform: scale(1);
+    }
+
+    to{
+        bottom: 0%;
+        width: 90%;
+        height: 90%;
+    }
+}
+
+.cms-enlarge-window{
+    animation-name: maxmise;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease;
+}
+
+.cms-minimise-window{
+
+    animation-name: minimise;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease;
+
+}
+
+
+/* today container */
+
+.cms-today-cls{
+    padding: 1em;
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    background-color: var(--smooth-blue);
+    border: 1px solid rgba(0, 170, 255, 0.278);
+    width: 90%;
+    max-width: 500px;
+}
+.cms-today-classes-title{
+    align-self: center;
+    color: var(--light-blue);
+    margin-bottom: 1em;
+}
+
+.cms-today-active-icon{
+   margin-left: auto;
+}
+
+@media (max-width:750px) {
+
+
+    .cms-today-main-container{
+        max-width: 90%;
+        min-width: 300px;
+    }
+}
