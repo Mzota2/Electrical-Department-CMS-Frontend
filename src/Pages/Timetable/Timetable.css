@@ -31,7 +31,7 @@
 @media (max-width:900px){
     .cms-timetable-days{
         overflow-x: auto;
-        grid-template-columns: repeat(5, minmax(100px, 150px));
+        grid-template-columns: repeat(5, minmax(120px, 150px));
     }
 
     .cms-timetable-day h4{
