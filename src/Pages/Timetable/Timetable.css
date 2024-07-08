@@ -23,6 +23,11 @@
     grid-column: 1 / 2;
 }
 
+.cms-timetable-class-day-title{
+    font-weight: 600;
+
+}
+
 @media (max-width:900px){
     .cms-timetable-days{
         overflow-x: auto;
@@ -99,4 +104,11 @@
 
 .cms-field{
     flex-shrink: 0;
+}
+
+@media (max-width:450px) {
+    .cms-timetable-class-day-title{
+        font-weight: 400;
+        
+    }
 }

@@ -246,7 +246,7 @@ function Timetable() {
           ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"].map((day)=>{
             return(
               <div key={day} className="cms-timetable-day">
-                <p><strong>{day}</strong></p>
+                <p className='cms-timetable-class-day-title'>{day}</p>
               </div>
             )
           })
