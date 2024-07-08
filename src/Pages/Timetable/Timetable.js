@@ -1,10 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import './Timetable.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getModules } from '../../State/ModulesSlice';
+import { getPrograms } from '../../State/ProgramsSlice';
 import { animated, useSpring } from '@react-spring/web';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+import { message } from 'antd';
+
 
 function Timetable() {
+  const [isLoading, setIsLoading] = useState(false);
+
+  //timetable
+  const pdfRef = useRef();
 
   const dispatch = useDispatch();
 
@@ -13,6 +22,8 @@ function Timetable() {
   //active user
   const activeUser = useSelector(state => state.students.activeUser);
   const studentsStatus = useSelector(state => state.students.status);
+  const foundPrograms = useSelector(state => state.programs.data);
+  const foundProgramsStatus = useSelector(state => state.programs.status);
 
   //modules
   const foundModules = useSelector(state => state.modules.data);
@@ -78,6 +89,38 @@ function Timetable() {
     
   }
 
+  function downloadPDF(){
+
+    const input = pdfRef.current;
+    try {
+      
+      html2canvas(input).then((canvas)=>{
+        const imgData  = canvas.toDataURL('image/png');
+        const pdf = new jsPDF('p', 'mm', 'a4', true);
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = pdf.internal.pageSize.getHeight();
+        const imgWidth = canvas.width;
+        const imgHeight = canvas.height;
+        const ratio = Math.min(pdfWidth/imgWidth, pdfHeight/imgHeight);
+        const imgX = (pdfWidth -imgWidth * ratio);
+        const imgY = 30;
+        pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth*ratio, imgHeight*ratio);
+        const foundProgram = foundPrograms?.find((pg)=> pg?._id === activeUser?.program);
+        pdf.save(`${foundProgram?.code ? foundProgram?.code + " Timetable":"Timetable"}`);
+      });
+
+      message.success("Completed Downloading Timetable")
+      
+    } catch (error) {
+      console?.log(error);
+    }finally{
+      
+    }
+    
+  }
+
+
+
   useEffect(()=>{
 
     if(foundModulesStatus === 'idle'){
@@ -94,7 +137,8 @@ function Timetable() {
               code:md?.code,
               lecturer:md?.lecturer,
               from:cls?.from,
-              to:cls?.to
+              to:cls?.to,
+              room:cls?.room
             }
           }
           
@@ -109,7 +153,8 @@ function Timetable() {
               code:md?.code,
               lecturer:md?.lecturer,
               from:cls?.from,
-              to:cls?.to
+              to:cls?.to,
+              room:cls?.room
             }
           }
           
@@ -124,7 +169,8 @@ function Timetable() {
               code:md?.code,
               lecturer:md?.lecturer,
               from:cls?.from,
-              to:cls?.to
+              to:cls?.to,
+              room:cls?.room
             }
           }
           
@@ -139,7 +185,8 @@ function Timetable() {
               code:md?.code,
               lecturer:md?.lecturer,
               from:cls?.from,
-              to:cls?.to
+              to:cls?.to,
+              room:cls?.room
             }
           }
           
@@ -154,7 +201,8 @@ function Timetable() {
               code:md?.code,
               lecturer:md?.lecturer,
               from:cls?.from,
-              to:cls?.to
+              to:cls?.to,
+              room:cls?.room
             }
           }
           
@@ -174,6 +222,11 @@ function Timetable() {
       })
     }
 
+    if(foundProgramsStatus === 'idle'){
+      dispatch(getPrograms());
+    }
+   
+
   }, [dispatch, foundModulesStatus, foundModules, activeUser, timetable])
   return (
     <div className='cms-timetable-container'>
@@ -184,14 +237,16 @@ function Timetable() {
           <option value="program modules">Program Modules</option>
           <option value="department modules">Deparment Modules</option>
         </select>
+
+        <button onClick={downloadPDF} style={{backgroundColor:"var(--dark-blue)", color:"white", marginLeft:"1em"}} className='cms-btn'>Download PDF</button>
       </div>
       
-      <animated.div style={slideDown} className="cms-timetable-days">
+      <animated.div ref={pdfRef}   style={slideDown} className="cms-timetable-days">
         {
           ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"].map((day)=>{
             return(
               <div key={day} className="cms-timetable-day">
-                <h4>{day}</h4>
+                <p><strong>{day}</strong></p>
               </div>
             )
           })
@@ -203,9 +258,11 @@ function Timetable() {
             modules?.monModules?.map((md, ind)=>{
                 return (
                   <animated.div style={fadeIn} key={ind} className="cms-timetable-mon-cls">
-                    <h4>{md?.code}</h4>
+                    <p className='cms-timetable-code'>{md?.code}</p>
                     <p>{md?.from} - {md?.to}</p>
+                    <p>{md?.room}</p>
                     <p>{md?.lecturer}</p>
+
                   </animated.div>
                 )
             })
@@ -217,8 +274,9 @@ function Timetable() {
             modules?.tueModules?.map((md, ind)=>{
                 return (
                   <animated.div style={fadeIn} key={ind} className="cms-timetable-mon-cls">
-                    <h4>{md?.code}</h4>
+                    <p className='cms-timetable-code'>{md?.code}</p>
                     <p>{md?.from} - {md?.to}</p>
+                    <p>{md?.room}</p>
                     <p>{md?.lecturer}</p>
                   </animated.div>
                 )
@@ -231,8 +289,9 @@ function Timetable() {
             modules?.wedModules?.map((md, ind)=>{
                 return (
                   <animated.div style={fadeIn} key={ind} className="cms-timetable-mon-cls">
-                    <h4>{md?.code}</h4>
+                    <p className='cms-timetable-code'>{md?.code}</p>
                     <p>{md?.from} - {md?.to}</p>
+                    <p>{md?.room}</p>
                     <p>{md?.lecturer}</p>
                   </animated.div>
                 )
@@ -245,8 +304,9 @@ function Timetable() {
             modules?.thurModules?.map((md,ind)=>{
                 return (
                   <animated.div style={fadeIn} key={ind} className="cms-timetable-mon-cls">
-                    <h4>{md?.code}</h4>
+                    <p className='cms-timetable-code'>{md?.code}</p>
                     <p>{md?.from} - {md?.to}</p>
+                    <p>{md?.room}</p>
                     <p>{md?.lecturer}</p>
                   </animated.div>
                 )
@@ -259,8 +319,9 @@ function Timetable() {
             modules?.friModules?.map((md, ind)=>{
                 return (
                   <animated.div style={fadeIn} key={ind} className="cms-timetable-mon-cls">
-                    <h4>{md?.code}</h4>
+                    <p className='cms-timetable-code'>{md?.code}</p>
                     <p>{md?.from} - {md?.to}</p>
+                    <p>{md?.room}</p>
                     <p>{md?.lecturer}</p>
                   </animated.div>
                 )

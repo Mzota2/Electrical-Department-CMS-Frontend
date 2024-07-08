@@ -501,7 +501,10 @@ function Groups() {
 
       else if (modulesStatus !== 'idle'){
         setIsLoading(false);
-        setModules(foundModules);
+        const activeUserModules = foundModules?.filter((md)=> {
+          return md?.programsId?.find((id)=> id === activeStudent?.program);
+        })
+        setModules(activeUserModules);
       }
 
       if(studentsStatus === 'idle'){
