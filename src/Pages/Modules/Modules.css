@@ -41,6 +41,12 @@
 
 }
 
+.cms-modules-study-online{
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
 /* MAIN CLASS MODULES */
 
 .class-modules-container{

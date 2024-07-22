@@ -91,16 +91,18 @@ function Timetable() {
 
   function downloadPDF(){
 
-    const input = pdfRef.current;
+    let input = pdfRef.current;
     try {
       
       html2canvas(input).then((canvas)=>{
         const imgData  = canvas.toDataURL('image/png');
         const pdf = new jsPDF('p', 'mm', 'a4', true);
-        const pdfWidth = pdf.internal.pageSize.getWidth();
+
+        const pdfWidth = pdf.internal.pageSize.getWidth(); 
         const pdfHeight = pdf.internal.pageSize.getHeight();
-        const imgWidth = canvas.width;
-        const imgHeight = canvas.height;
+      
+        const imgWidth = canvas.width + canvas.scrollWidth;
+        const imgHeight = canvas.height + canvas.scrollHeight;
         const ratio = Math.min(pdfWidth/imgWidth, pdfHeight/imgHeight);
         const imgX = (pdfWidth -imgWidth * ratio);
         const imgY = 30;

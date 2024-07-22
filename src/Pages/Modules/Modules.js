@@ -98,9 +98,7 @@ function Modules() {
     config:{
       duration:2000
     }
-  })
-
-
+  });
   //DOM Functions
 
   function handleActiveTab(e){
@@ -833,12 +831,18 @@ function Modules() {
         <div className="cms-students-background">
           
           <animated.div style={fadeIn} className="cms-students-text">
-              <h1 className='cms-students-title'>MODULES</h1>
-              <p className='cms-students-description'>Find your modules</p>
+              <h1 className='cms-students-title'>MODULES</h1> 
+
+              <div className="cms-modules-study-online">
+                <p className='cms-students-description'>Find your modules</p>
+                <h1>&</h1>
+                <a style={{color:"var(--light-blue)", textDecoration:"none", fontSize:"1.5rem"}} href="https://demo.saenterprises.ind.in/library/" target="_blank" rel="noopener noreferrer">study online</a>
+              </div>
+
           </animated.div>
 
           <animated.img style={fadeIn} src={moduleBackgroundImage} alt="" className='cms-module-backgroundImage' />
-          <div style={{backgroundColor: 'rgba(0, 0, 0, 0.3)'}} className="video-background-overlay"></div>
+          <div style={{backgroundColor: 'rgba(0, 0, 0, 0.4)'}} className="video-background-overlay"></div>
         </div>
      
       <div className="class-modules-container">
