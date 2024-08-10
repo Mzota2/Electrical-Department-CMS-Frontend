@@ -151,9 +151,10 @@ function SemesterInfo() {
     
             });
 
-            const userGroups = foundGroups[0].flat();
-
-            setModules(userGroups);
+            const userGroups = foundGroups?.filter(grp => grp?.length)?.flat();
+            const cgroups = userGroups?.flat();
+            console.log(cgroups);
+            setModules(cgroups);
         }
 
         if(foundStudentsStatus === 'idle'){

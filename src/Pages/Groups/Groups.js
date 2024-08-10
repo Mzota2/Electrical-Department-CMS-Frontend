@@ -7,9 +7,6 @@ import axios from 'axios'
 import './Groups.css';
 import { appUrl } from '../../Helpers';
 import { getModules } from '../../State/ModulesSlice';
-import groupsImage from '../../Assets/class.jpg';
-import {Parallax, ParallaxLayer} from '@react-spring/parallax'
-import { Link } from 'react-router-dom';
 import {Close, ArrowBack, ArrowForward} from '@mui/icons-material';
 import ShuffleIcon from '@mui/icons-material/Shuffle';
 import { useRef } from 'react';
@@ -20,7 +17,6 @@ import MiniLoader from '../../Components/MiniLoader/MiniLoader';
 import { message } from 'antd';
 import groupBackgroundImage from '../../Assets/class.jpg';
 import { animated, useSpring } from '@react-spring/web';
-import { duration } from '@mui/material';
 
 function Groups() {
 
