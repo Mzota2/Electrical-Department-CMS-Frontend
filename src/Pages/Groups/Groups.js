@@ -113,7 +113,8 @@ function Groups() {
     
       if(selectedModule){
         const index = foundModules?.indexOf(selectedModule);
-        setGroupModule(prev =>{
+
+        setApiGroups(prev =>{
           return [selectedModule];
         });
 
@@ -122,7 +123,7 @@ function Groups() {
             ...prev,
             moduleIndex:index
           }
-        })
+        });
       } 
     }
 
@@ -449,40 +450,39 @@ function Groups() {
           return [...prev, student?._id] //changed to student_id
         });
     }
-  }
+    }
 
-  function handlePagerBackward(){
-    
-      if(groupsPage.endIndex>6){
-        setGroupsPage(prev =>{
-              
-            return{
-                  ...prev,
-                  page:prev.page-1,
-                  startIndex:prev.startIndex-6,
-                  endIndex:prev.endIndex-prev.startIndex>6?prev.endIndex-6: prev.endIndex-(prev.endIndex - prev.startIndex)
-              }
-          })
-      }
-  }
-
-  function handlePagerForward(){
-    //
-      const groupsNum =  apiGroups[assignPage.index]?.assignments?.length;
+    function handlePagerBackward(){
       
-      
-      if(groupsPage.endIndex < groupsNum){
-        setGroupsPage(prev =>{
+        if(groupsPage.endIndex>6){
+          setGroupsPage(prev =>{
+                
               return{
-                  ...prev,
-                  page:prev.page+1,
-                  startIndex:prev.endIndex,
-                  endIndex:groupsNum - prev.endIndex >= 6? prev.endIndex+6: groupsNum
-              }
-          })
-      }
+                    ...prev,
+                    page:prev.page-1,
+                    startIndex:prev.startIndex-6,
+                    endIndex:prev.endIndex-prev.startIndex>6?prev.endIndex-6: prev.endIndex-(prev.endIndex - prev.startIndex)
+                }
+            })
+        }
+    }
 
-  }
+    function handlePagerForward(){
+      //
+        const groupsNum =  apiGroups[assignPage?.moduleIndex]?.assignments[assignPage?.assignIndex]?.groups?.length;
+       
+        if(groupsPage.endIndex < groupsNum){
+          setGroupsPage(prev =>{
+                return{
+                    ...prev,
+                    page:prev.page+1,
+                    startIndex:prev.endIndex,
+                    endIndex:groupsNum - prev.endIndex >= 6? prev.endIndex+6: groupsNum
+                }
+            })
+        }
+
+    }
 
     React.useEffect(()=>{
       if(groupsStatus === 'idle'){
@@ -564,8 +564,7 @@ function Groups() {
         dispatch(setActiveModules(myModules))
       }
 
-
-    }, [dispatch, groupsStatus, foundStudents, foundModules, selectedModule, resultGroups, taskTitle, studentsStatus, modulesStatus, groupReps, activeStudent])
+    }, [dispatch,groupsStatus, foundStudents, foundModules, selectedModule, resultGroups, taskTitle, studentsStatus, modulesStatus, groupReps, activeStudent])
 
       
 
@@ -736,7 +735,6 @@ function Groups() {
                     )
                   })
                 }
-
                 </select>
 
                 <div className="cms-selected-module-groups-title-container">
