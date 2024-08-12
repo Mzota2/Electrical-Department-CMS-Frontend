@@ -68,7 +68,9 @@
     padding: 2em;
     z-index: 6;
 }
+.groups-container{
 
+}
 .cms-group-rep-btn{
     background-color: var(--light-blue);
     color: white;
@@ -253,6 +255,7 @@
     width: 50%;
     height: 70%;
     min-height: 500px;
+    max-height: 80vh;
    
 }
 
