@@ -116,6 +116,7 @@ function Settings() {
   }
 
   async function updateUser (){
+    console.log(user);
     try {
       setShowMiniLoader(true);
       const response = await axios.put(`${appUrl}student/${user?._id}`, {...user, username:user?.username, regNO:user?.regNO});

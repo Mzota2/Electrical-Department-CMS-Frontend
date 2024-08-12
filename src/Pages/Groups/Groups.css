@@ -1,4 +1,6 @@
+.cms-select-rep-btn{
 
+}
 .cms-groups-outer-container{
     height: fit-content;
     width: 100%;
@@ -27,25 +29,35 @@
     margin-top: 2em;
     background-color: white;
     height: fit-content;
-    
+    position: relative;
 }
 
 .cms-group-reps-menu{
-    position: relative;
+    width: 100%;
 }
 .cms-group-reps-selections{
-    top: 0;
     right: 0;
-    display: flex;
-    flex-direction: column;
     position: absolute;
     background-color: white;
-    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.35);
-    padding: 2em;
-    gap: 1em;
-    max-width: 300px;
+    box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.35);
+    width: 100%;
     height: 80vh;
+    padding: 2em 2em;
+    margin-top: 2em;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+
+}
+.cms-select-reps-container{
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+    gap: 1em;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
 }
 
 .cms-group-container{
@@ -60,15 +72,16 @@
 .cms-group-rep-btn{
     background-color: var(--light-blue);
     color: white;
+    text-align: left;
 }
 
 .cms-group-member-btn{
-    background-color: black;
-    color: white;
+    background-color: var(--feint-blue);
+    color: black;
+    text-align: left;
 }
 
 .cms-group-rep-option{
-    min-width: 200px;
     display: flex;
     align-items: center;
     gap: 1em;
@@ -82,9 +95,20 @@
 
 .cms-select-rep-btn{
     background-color: var(--light-blue);
-    padding: .5em;
     color: white;
-    font-size: 1rem
+    font-size: 1rem;
+    width: 150px;
+}
+.cms-created-group-assignment-details{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+}
+.cms-delete-group-btn{
+    background-color: red;
+    margin-left: auto;
+    color: white;
 }
 /* NEW */
 
@@ -474,6 +498,10 @@
         width: 100%;
         order: 1;
     }
+
+    .cms-select-reps-container{
+        grid-template-columns: 45% 45%;
+    }
     
 }
 
@@ -520,6 +548,22 @@
     }
     .cms-select-rep-btn{
         flex-shrink: 0;
+    }
+    .cms-group-reps-selections{
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+
+    .cms-select-reps-container{
+        row-gap: 1em;
+        column-gap: 0em;
+        font-size: .8rem;
+    }
+    .cms-group-rep-option{
+        gap: .5em;
+    }
+    .cms-group-rep-btn, .cms-group-member-btn{
+        font-size: .8rem;
     }
 
    

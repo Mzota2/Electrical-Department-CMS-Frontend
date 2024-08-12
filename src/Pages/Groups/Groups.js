@@ -17,12 +17,15 @@ import MiniLoader from '../../Components/MiniLoader/MiniLoader';
 import { message } from 'antd';
 import groupBackgroundImage from '../../Assets/class.jpg';
 import { animated, useSpring } from '@react-spring/web';
+import DialogBox from '../../Components/DialogBox/DialogBox';
 
 function Groups() {
 
     const [isLoading, setIsLoading] = useState(false);
     const [pending, setPending]= useState(false);
     const [showMiniLoader, setShowMiniLoader] = useState(false);
+    const [deletedDialog, setDeleteDialog] = useState(false);
+    const [currGroupIndex, setCurrGroupIndex] = useState();
 
     const [assignPage, setAssignPage] = useState({
       assignIndex:0,
@@ -108,13 +111,34 @@ function Groups() {
       }
     })
 
+    function handleDisplayDialogBox(){
+      setDeleteDialog(prev => !prev);
+    }
+
+    async function deleteGroup(){
+      try {
+        const currModule = {...groupModule[0]};
+        console.log(currGroupIndex);
+        const newAssignments = currModule.assignments.filter((assign, key)=> key !== currGroupIndex);
+        const response = await axios.put(`${appUrl}module/${currModule?._id}`, {...currModule, assignments:newAssignments})
+        const {data} = response;
+        console.log(data);
+        setGroupModule(data);
+
+        message.success("Group assignment deleted successfully");
+        
+      } catch (error) {
+        message.error("Oops ! something went wrong");
+      }
+    }
+
     function handleChangeGroupModule(e){
       const selectedModule = foundModules?.find((md)=> md?._id === e.target.value);
     
       if(selectedModule){
         const index = foundModules?.indexOf(selectedModule);
 
-        setApiGroups(prev =>{
+        setGroupModule(prev =>{
           return [selectedModule];
         });
 
@@ -469,7 +493,7 @@ function Groups() {
 
     function handlePagerForward(){
       //
-        const groupsNum =  apiGroups[assignPage?.moduleIndex]?.assignments[assignPage?.assignIndex]?.groups?.length;
+        const groupsNum =  groupModule[0]?.assignments[assignPage?.assignIndex]?.groups?.length;
        
         if(groupsPage.endIndex < groupsNum){
           setGroupsPage(prev =>{
@@ -535,25 +559,7 @@ function Groups() {
         });
 
       }
-      
-      if(studentModules){
-        
-        const foundModuleGroups = studentModules?.filter(md =>{
-          
-          const foundGroups = md?.assignments?.find((assign)=>{
-            return assign?.type === 'group';
-            
-          });
 
-          if(foundGroups){
-            return md;
-          }
-          
-        });
-
-        
-        setApiGroups(foundModuleGroups);
-      }
 
       if(activeStudent){
         //dispatch everything that belongs to the user
@@ -564,7 +570,9 @@ function Groups() {
         dispatch(setActiveModules(myModules))
       }
 
-    }, [dispatch,groupsStatus, foundStudents, foundModules, selectedModule, resultGroups, taskTitle, studentsStatus, modulesStatus, groupReps, activeStudent])
+      console.log(groupModule);
+
+    }, [dispatch,groupsStatus,currGroupIndex, groupModule, foundStudents, foundModules, selectedModule, resultGroups, taskTitle, studentsStatus, modulesStatus, groupReps, activeStudent])
 
       
 
@@ -575,6 +583,7 @@ function Groups() {
     
       <div className='cms-groups-outer-container'>
 
+      { deletedDialog? <DialogBox type={'danger'} handleDeny={handleDisplayDialogBox} handleConfirm={deleteGroup} message={'Are you sure you want to delete this group work'}/>:<></>}
         {
           showMiniLoader? <MiniLoader/>:<></>
         }
@@ -591,13 +600,11 @@ function Groups() {
             <div className="video-background-overlay"></div>
           </div>
           
-
           
           {activeStudent?.isClassRep? 
           <div className="cms-group-container">
           
             <div className="cms-group-menu-options">
-            
 
               <select onChange={handleSelectedModule} value={selectedModule} name="modules" id="modules" className='cms-field cms-select-module-field'>
                 <option value="">Select module</option>
@@ -614,27 +621,36 @@ function Groups() {
 
 
               <div className='cms-group-reps-menu'>
-
+              
               {showReps?<div className="cms-group-reps-selections">
+                
                 <div style={{alignSelf:"center"}} onClick={handleShowReps} className="close-icon-container">
                         <Close className='close-icon' />
                 </div>
-              {
-                    moduleStudents?.map((member)=>{
+
+                <div className="cms-select-reps-container">
+                {
+                    moduleStudents?.map((member, index)=>{
 
                       const isChecked = groupReps.find(rep => rep === member?._id); //changed to id
                     
 
                       return (
-                        <div key={member?._id} className="cms-group-rep-option">
-                            <p value={member?._id}>{member?.username}</p>
-                            <button className={`cms-btn ${isChecked? 'cms-group-rep-btn':'cms-group-member-btn'}`}  onClick={()=>{handleSelectRep(member)}} >{`${isChecked? 'Rep': 'Select'}`}</button>
-                        </div>
+                        <button onClick={()=>{handleSelectRep(member)}}  key={member?._id} className={`cms-btn ${isChecked? 'cms-group-rep-btn':'cms-group-member-btn'}`}>
+                            <p value={member?._id}>{index+1+'. '}{member?.username}</p>
+                            {/* <button className=  >{`${isChecked? 'Rep': 'Select'}`}</button> */}
+                        </button>
                       
                       )
                     })
                   }
-              </div>:<></>}
+                </div>
+
+               
+
+              </div>:<></>
+              }
+              
               </div>
           
             </div>
@@ -716,113 +732,114 @@ function Groups() {
             </div>
 
             <br />
+            </div>:<></>}
+          
+            <div  className='cms-created-groups-container'>
+                  <h3 className='cms-created-groups-title'>RECENTLY CREATED GROUPS</h3>
+                  <br />
 
-        
-
-          </div>:<></>}
-        
-          <div  className='cms-created-groups-container'>
-                <h3 className='cms-created-groups-title'>RECENTLY CREATED GROUPS</h3>
-                <br />
-
-                <select onChange={handleChangeGroupModule} name="modules" id="modules" className='cms-field cms-add-student-field'>
-                {
-                  modules?.map((md, index)=>{
-                    return(
-                      <option key={index}  value={md?._id} >
-                        {md?.code}
-                      </option>
-                    )
-                  })
-                }
-                </select>
-
-                <div className="cms-selected-module-groups-title-container">
+                  <select onChange={handleChangeGroupModule} name="modules" id="modules" className='cms-field cms-add-student-field'>
                   {
-                    apiGroups[assignPage?.moduleIndex]?.assignments?.map((assign, index)=>{
-                      
-                      
-                        if(assign?.type === 'group' && assign?.task){
-                          return (
-                            <div key={index}  className="cms-selected-module-group-title">
-                                  <p className="cms-selected-module-group-title" onClick={()=>{handleSelectTask(index)}}>
-                                  {assign?.task?.substring(0, 16)+'...'}
-                                </p>
-                            </div>
-                            
-                          )
-                        }
-                    
+                    modules?.map((md, index)=>{
+                      return(
+                        <option key={index}  value={md?._id} >
+                          {md?.code}
+                        </option>
+                      )
                     })
                   }
-                </div>
+                  </select>
 
-                <div className="cms-recently-created-groups-container">
-                  <br />
-                    {apiGroups?.length? [apiGroups[assignPage?.moduleIndex]?.assignments[assignPage?.assignIndex]].map((groups, index)=>{
+                  <div className="cms-selected-module-groups-title-container">
+                    {
+                      groupModule[0]?.assignments?.map((assign, index)=>{
+                        
+                        
+                          if(assign?.type === 'group' && assign?.task){
+                            return (
+                              <div key={index}  className="cms-selected-module-group-title">
+                                    <p className="cms-selected-module-group-title" onClick={()=>{handleSelectTask(index)}}>
+                                    {assign?.task?.substring(0, 16)+'...'}
+                                  </p>
+                              </div>
+                              
+                            )
+                          }
                       
-                      if(groups?.type === 'group'){
+                      })
+                    }
+                  </div>
 
-                        return(
-                        <div className='cms-created-assignment' key={index} >
-                          <h3 className='cms-task-title'>{groups?.task}</h3>
+                  <div className="cms-recently-created-groups-container">
+                    <br />
+                      {groupModule?.length? [groupModule[0]?.assignments[assignPage?.assignIndex]].map((groups, index)=>{
+                        
+                        if(groups?.type === 'group'){
 
-                          <div className='cms-created-assignment-groups'>
-                          {groups?.groups.map((group, index)=>{
+                          return(
+                          <div className='cms-created-assignment' key={index} >
+                            <div className="cms-created-group-assignment-details">
+                              <h3 className='cms-task-title'>{groups?.task}</h3>
+                              <button onClick={()=>{handleDisplayDialogBox(); setCurrGroupIndex(index)}} className='cms-btn cms-delete-group-btn'>Delete</button>
+                            </div>
                             
-                      
-                            if(index >= groupsPage.startIndex && index <groupsPage.endIndex){
-                                
-                                return(
-                                  <animated.div style={zoomOut} key={index} className="group">
-                                    
-                                    <h3 style={{color:"black"}}>Group {index+1}</h3>
-                                    <br />
-                                    {
-                                      group?.map((memberId, index)=>{
-                                        const member = foundStudents?.find(std => std?._id === memberId);
-                                        return(
-                                          <div key={index} className="cms-random-group-student">
-                                              <p  className='member-title'>{member?.username}</p>
-                                                <p  className='member-regNo'>{member?.regNO}</p> 
-                                          </div>
-                                          
-                                        )
-                                      })
-                                    }
-                                  </animated.div>
-                                )
-                            }
-                            
-                          })}
-                          </div>
 
-                          <div className="cms-students-page-num">
-                              {
-                                  groupsPage.page
+                            <div className='cms-created-assignment-groups'>
+                            {groups?.groups.map((group, index)=>{
+                              
+                        
+                              if(index >= groupsPage.startIndex && index <groupsPage.endIndex){
+                                  
+                                  return(
+                                    <animated.div style={zoomOut} key={index} className="group">
+                                      
+                                      <h3 style={{color:"black"}}>Group {index+1}</h3>
+                                      <br />
+                                      {
+                                        group?.map((memberId, index)=>{
+                                          const member = foundStudents?.find(std => std?._id === memberId);
+                                          return(
+                                            <div key={index} className="cms-random-group-student">
+                                                <p  className='member-title'>{member?.username}</p>
+                                                  <p  className='member-regNo'>{member?.regNO}</p> 
+                                            </div>
+                                            
+                                          )
+                                        })
+                                      }
+                                    </animated.div>
+                                  )
                               }
-                          </div>
+                              
+                            })}
+                            </div>
 
-                          <div className="cms-students-container-pager-tabs">
-                            <button onClick={handlePagerBackward} style={{backgroundColor:"white"}} className='cms-btn'>
-                                <ArrowBack />
-                            </button>
-                            <button onClick={handlePagerForward} style={{backgroundColor:"white"}} className='cms-btn'>
-                                <ArrowForward className='' />
-                            </button>
-                          </div>
-                                
-                        </div>
-                      )
-                      }
-                      
-                    }):<></>}
-                </div>
+                            <div className="cms-students-page-num">
+                                {
+                                    groupsPage.page
+                                }
+                            </div>
 
-          
-          
-    
-          </div>
+                            <div className="cms-students-container-pager-tabs">
+                              <button onClick={handlePagerBackward} style={{backgroundColor:"white"}} className='cms-btn'>
+                                  <ArrowBack />
+                              </button>
+                              <button onClick={handlePagerForward} style={{backgroundColor:"white"}} className='cms-btn'>
+                                  <ArrowForward className='' />
+                              </button>
+                            </div>
+                                  
+                          </div>
+                        )
+                        }
+                        
+                      }):<></>}
+                  </div>
+
+            
+            
+      
+            </div>
      
       </div>
 
