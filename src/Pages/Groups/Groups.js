@@ -780,7 +780,7 @@ function Groups() {
                           <div className='cms-created-assignment' key={index} >
                             <div className="cms-created-group-assignment-details">
                               <h3 className='cms-task-title'>{groups?.task}</h3>
-                              <button onClick={()=>{handleDisplayDialogBox(); setCurrGroupIndex(index)}} className='cms-btn cms-delete-group-btn'>Delete</button>
+                             {activeStudent?.isClassRep?  <button onClick={()=>{handleDisplayDialogBox(); setCurrGroupIndex(index)}} className='cms-btn cms-delete-group-btn'>Delete</button>:<></>}
                             </div>
                             
 
